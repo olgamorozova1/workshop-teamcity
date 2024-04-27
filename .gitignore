@@ -1,0 +1,19 @@
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+.allure
+schema
+build
+/*/allure-results/
+out
+
+### IntelliJ IDEA ###
+.idea/*
+!.idea/vcs.xml
+!.idea/icon.png
+*.iml
+*.ipr
+
+### Mac OS ###
+.DS_Store
