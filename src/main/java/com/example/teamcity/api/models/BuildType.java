@@ -3,13 +3,17 @@ package com.example.teamcity.api.models;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.With;
 
 import java.util.List;
 
 @Data
+@With
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode
 @Builder
 public class BuildType {
     private String id;
@@ -21,6 +25,7 @@ public class BuildType {
     @AllArgsConstructor
     @NoArgsConstructor
     @Builder
+    @EqualsAndHashCode
     public static class Steps {
         private List<Step> step;
     }
@@ -29,6 +34,7 @@ public class BuildType {
     @AllArgsConstructor
     @NoArgsConstructor
     @Builder
+    @EqualsAndHashCode
     public static class Step {
         private String name;
         private String type;
@@ -39,6 +45,7 @@ public class BuildType {
     @AllArgsConstructor
     @NoArgsConstructor
     @Builder
+    @EqualsAndHashCode
     public static class Properties {
         private List<Property> property;
     }
@@ -47,6 +54,7 @@ public class BuildType {
     @AllArgsConstructor
     @NoArgsConstructor
     @Builder
+    @EqualsAndHashCode
     public static class Property {
         private String name;
         private String value;
