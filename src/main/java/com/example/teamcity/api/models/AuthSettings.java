@@ -15,29 +15,28 @@ import java.util.List;
 @NoArgsConstructor
 @EqualsAndHashCode
 @Builder
-public class BuildType {
-    private String id;
-    private String name;
-    private NewProjectDescription project;
-    private Steps steps;
+public class AuthSettings {
+    private boolean allowGuest;
+    private String guestUsername;
+    private String welcomeText;
+    private boolean collapseLoginForm;
+    private boolean perProjectPermissions;
+    private boolean emailVerification;
+    private Modules modules;
 
     @Data
     @AllArgsConstructor
-    @NoArgsConstructor
     @Builder
-    @EqualsAndHashCode
-    public static class Steps {
-        private List<Step> step;
+    public static class Modules {
+        private List<Module> module;
     }
 
     @Data
     @AllArgsConstructor
     @NoArgsConstructor
     @Builder
-    @EqualsAndHashCode
-    public static class Step {
+    public static class Module {
         private String name;
-        private String type;
         private Properties properties;
     }
 
@@ -45,18 +44,28 @@ public class BuildType {
     @AllArgsConstructor
     @NoArgsConstructor
     @Builder
-    @EqualsAndHashCode
     public static class Properties {
         private List<Property> property;
+        private int count;
+        private String href;
     }
 
     @Data
     @AllArgsConstructor
     @NoArgsConstructor
     @Builder
-    @EqualsAndHashCode
     public static class Property {
         private String name;
         private String value;
+        private boolean inherited;
+        private Type type;
+    }
+
+    @Data
+    @AllArgsConstructor
+    @NoArgsConstructor
+    @Builder
+    public static class Type {
+        private String rawValue;
     }
 }
