@@ -17,8 +17,6 @@ public class Specifications {
     private Specifications() {
     }
 
-    ;
-
     public static Specifications getSpec() {
         if (spec == null) {
             spec = new Specifications();

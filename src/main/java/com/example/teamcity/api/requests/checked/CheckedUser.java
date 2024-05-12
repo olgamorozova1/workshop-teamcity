@@ -11,7 +11,6 @@ import static org.apache.http.HttpStatus.SC_OK;
 
 
 public class CheckedUser extends Request implements Crud {
-    private final static String USER_ENDPOINT = "/app/rest/users";
 
     public CheckedUser(RequestSpecification spec) {
         super(spec);
