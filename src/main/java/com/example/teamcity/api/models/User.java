@@ -1,6 +1,12 @@
 package com.example.teamcity.api.models;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.With;
+
+import static com.example.teamcity.api.constants.Endpoints.USER_BY_USERNAME_ENDPOINT;
 
 
 @Data
@@ -8,9 +14,19 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class User {
+public class User implements Deletable {
     private String username;
     private String password;
     private String email;
     private Roles roles;
+
+    @Override
+    public String getEndpointToDelete() {
+        return USER_BY_USERNAME_ENDPOINT;
+    }
+
+    @Override
+    public String getIdToDelete() {
+        return username;
+    }
 }
