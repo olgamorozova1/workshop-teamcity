@@ -5,7 +5,7 @@ target/
 .allure
 schema
 build
-/*/allure-results/
+/*/allure-results/*
 out
 .mvn/*
 mvnv
