@@ -18,4 +18,8 @@ public class Selectors {
     public static ByAttribute byClass(String value) {
         return new ByAttribute("class", value);
     }
+
+    public static ByAttribute byDataHintContainer(String value) {
+        return new ByAttribute("data-hint-container-id", value);
+    }
 }

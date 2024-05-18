@@ -2,9 +2,10 @@ package com.example.teamcity.ui.elements;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import com.example.teamcity.ui.pages.Page;
 import org.openqa.selenium.By;
 
-public abstract class PageElement {
+public abstract class PageElement extends Page {
     private final SelenideElement element;
 
     public PageElement(SelenideElement element) {

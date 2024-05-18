@@ -11,10 +11,15 @@ import static com.codeborne.selenide.Selenide.element;
 
 public class FavoritesPage extends Page {
     private SelenideElement header = element(Selectors.byDataTest("overview-header"));
+    private SelenideElement projectsLoaderSpinner = element(Selectors.byDataTest("ring-loader-inline"));
 
     public void waitUntilFavoritesPageIsLoaded() {
         waitUntilPageIsLoaded();
         header.shouldBe(Condition.visible, Duration.ofSeconds(10));
+        waitForProjectListLoad();
     }
 
+    private void waitForProjectListLoad() {
+        projectsLoaderSpinner.shouldNotBe(Condition.visible, Duration.ofSeconds(30));
+    }
 }
