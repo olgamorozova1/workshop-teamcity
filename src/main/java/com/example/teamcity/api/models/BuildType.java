@@ -32,8 +32,7 @@ public class BuildType implements Deletable {
     public String getIdToDelete() {
         return id;
     }
-
-
+    
     @Data
     @AllArgsConstructor
     @NoArgsConstructor
