@@ -21,6 +21,7 @@
         <json.version>2.10.1</json.version>
         <assertJ.version>3.25.3</assertJ.version>
         <java.faker.version>1.0.2</java.faker.version>
+        <selenide.version>7.2.3</selenide.version>
     </properties>
 
     <dependencies>
@@ -83,6 +84,11 @@
             <groupId>com.github.javafaker</groupId>
             <artifactId>javafaker</artifactId>
             <version>${java.faker.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.codeborne</groupId>
+            <artifactId>selenide</artifactId>
+            <version>${selenide.version}</version>
         </dependency>
     </dependencies>
     <build>
