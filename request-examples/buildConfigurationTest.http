@@ -1,10 +1,10 @@
 ### 0. Generate token
-GET http://192.168.1.100:8111/authenticationTest.html?csrf
+GET http://192.168.1.103:8111/authenticationTest.html?csrf
 Authorization: Basic admin admin
 Accept: application/json
 
 ###1. Create project
-POST http://192.168.1.100:8111/app/rest/projects
+POST http://192.168.1.103:8111/app/rest/projects
 Content-Type: application/json
 Accept: application/json
 X-TC-CSRF-Token:c6528d58-5557-4dfd-aa44-e011a99f4308
@@ -19,7 +19,7 @@ X-TC-CSRF-Token:c6528d58-5557-4dfd-aa44-e011a99f4308
 }
 
 ###2. Create build configuration
-POST http://192.168.1.100:8111/app/rest/buildTypes
+POST http://192.168.1.103:8111/app/rest/buildTypes
 Content-Type: application/json
 Accept: application/json
 X-TC-CSRF-Token:c6528d58-5557-4dfd-aa44-e011a99f4308
@@ -57,7 +57,7 @@ X-TC-CSRF-Token:c6528d58-5557-4dfd-aa44-e011a99f4308
 }
 
 ###3. Run build
-POST http://192.168.1.100:8111/app/rest/buildQueue
+POST http://192.168.1.103:8111/app/rest/buildQueue
 Content-Type: application/json
 Accept: application/json
 X-TC-CSRF-Token:dff6eb48-a300-4b43-8998-df08acfa6b1f
@@ -69,7 +69,7 @@ X-TC-CSRF-Token:dff6eb48-a300-4b43-8998-df08acfa6b1f
 }
 
 ###4. Get build status
-GET http://192.168.1.100:8111/app/rest/builds/id:1
+GET http://192.168.1.103:8111/app/rest/builds/id:1
 Content-Type: application/json
 Accept: application/json
 X-TC-CSRF-Token:dff6eb48-a300-4b43-8998-df08acfa6b1f

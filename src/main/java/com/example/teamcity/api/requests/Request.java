@@ -9,4 +9,5 @@ import lombok.Builder;
 @AllArgsConstructor
 public class Request {
     protected final RequestSpecification spec;
+    protected final String endpoint;
 }

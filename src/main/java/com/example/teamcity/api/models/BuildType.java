@@ -9,18 +9,30 @@ import lombok.With;
 
 import java.util.List;
 
+import static com.example.teamcity.api.constants.Endpoints.BUILD_CONFIG_ENDPOINT_BY_ID;
+
 @Data
 @With
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
 @Builder
-public class BuildType {
+public class BuildType implements Deletable {
     private String id;
     private String name;
     private NewProjectDescription project;
     private Steps steps;
 
+    @Override
+    public String getEndpointToDelete() {
+        return BUILD_CONFIG_ENDPOINT_BY_ID;
+    }
+
+    @Override
+    public String getIdToDelete() {
+        return id;
+    }
+    
     @Data
     @AllArgsConstructor
     @NoArgsConstructor

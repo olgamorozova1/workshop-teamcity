@@ -1,10 +1,10 @@
 package com.example.teamcity.api.generators;
 
 import com.example.teamcity.api.models.BuildType;
+import com.example.teamcity.api.models.Deletable;
 import com.example.teamcity.api.models.NewProjectDescription;
 import com.example.teamcity.api.models.User;
-import com.example.teamcity.api.requests.unchecked.UncheckedProject;
-import com.example.teamcity.api.requests.unchecked.UncheckedUser;
+import com.example.teamcity.api.requests.UncheckedBase;
 import com.example.teamcity.api.spec.Specifications;
 import lombok.Builder;
 import lombok.Data;
@@ -18,9 +18,8 @@ public class TestData {
     private NewProjectDescription project;
     private BuildType buildType;
 
-    public void delete() {
-        var spec = Specifications.getSpec().superUserSpec();
-        new UncheckedProject(spec).delete(project.getId());
-        new UncheckedUser(spec).delete(user.getUsername());
+    public static void delete(Deletable entity) {
+        new UncheckedBase(Specifications.getSpec().superUserSpec(), entity.getEndpointToDelete())
+                .delete(entity.getIdToDelete());
     }
 }

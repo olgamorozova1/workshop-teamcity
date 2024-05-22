@@ -13,6 +13,10 @@ public class RandomData {
         return randomAlphabetic(length);
     }
 
+    public static int getInt(int length) {
+        return faker.random().nextInt(length);
+    }
+
     public static String getNumber(int length) {
         return randomNumeric(length);
     }

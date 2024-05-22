@@ -1,14 +1,20 @@
 package com.example.teamcity.api.generators;
 
+import com.example.teamcity.api.models.Deletable;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.example.teamcity.api.generators.TestData.delete;
 
 public class TestDataStorage {
     private static TestDataStorage testDataStorage;
     private List<TestData> testDataList;
+    public List<Object> createdEntities;
 
     private TestDataStorage() {
         this.testDataList = new ArrayList<>();
+        createdEntities = new ArrayList<>();
     }
 
     public static TestDataStorage getStorage() {
@@ -29,7 +35,15 @@ public class TestDataStorage {
         return testData;
     }
 
-    public void delete() {
-        testDataList.forEach(TestData::delete);
+    public void addCreatedEntity(Object createdEntity) {
+        createdEntities.add(createdEntity);
+    }
+
+    public void deleteCreatedEntity() {
+        createdEntities.forEach(x -> {
+            if (x instanceof Deletable) {
+                delete((Deletable) x);
+            }
+        });
     }
 }
