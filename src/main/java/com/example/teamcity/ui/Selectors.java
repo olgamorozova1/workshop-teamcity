@@ -22,4 +22,8 @@ public class Selectors {
     public static ByAttribute byDataHintContainer(String value) {
         return new ByAttribute("data-hint-container-id", value);
     }
+
+    public static ByAttribute byName(String value) {
+        return new ByAttribute("name", value);
+    }
 }

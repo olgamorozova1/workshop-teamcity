@@ -38,6 +38,13 @@ public class CheckedBase<T> extends Request implements Crud {
                 .extract().as(returnType);
     }
 
+    public T get() {
+        return new UncheckedBase(spec, endpoint)
+                .get()
+                .then().assertThat().statusCode(SC_OK)
+                .extract().as(returnType);
+    }
+
     @Override
     public T update(Object value, Object obj) {
         return null;

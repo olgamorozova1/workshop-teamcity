@@ -1,0 +1,85 @@
+name: TeamCity tests
+
+on: push
+
+jobs:
+  run_teamcity_tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'zulu'
+
+        # По умолчанию в ubuntu отсутствует команда ifconfig
+      - name: Install ifconfig
+        run: sudo apt-get update && sudo apt-get install -y net-tools
+
+      - name: Set up host environment variable
+        # Команда для определения ip адреса для обращения из другого контейнера, рекомендуется в документации Selenoid UI: https://aerokube.com/selenoid-ui/latest/
+        run: |
+          echo "HOST=$(ifconfig | grep -E "([0-9]{1,3}\.){3}[0-9]{1,3}" | grep -v 127.0.0.1 | awk '{ print $2 }' | cut -f2 -d: | head -n1)" >> $GITHUB_ENV
+      # Храним переменные как в переменных среды ($GITHUB_ENV), для использования внутри этого yml файла, так и в config.properties, для использования в тестах
+      - name: Set up host config property
+        run: echo "host=$HOST:8111" >> src/main/resources/config.properties
+
+      - name: Pull Selenoid Chrome
+        run: docker pull selenoid/vnc_chrome:119.0
+
+      - name: Run Selenoid
+        # Флаг -d запускает контейнер в фоновом режиме (так как, например, контейнер с сервером не имеет окончания, он просто всегда включен,
+        # и если мы без этого флага в него перейдем, то никогда не сможем перешагнуть к следующему степу
+        run: |
+          docker run -d --name selenoid \
+          -v /var/run/docker.sock:/var/run/docker.sock \
+          -v $(pwd)/config/:/etc/selenoid/:ro \
+          -p 4444:4444 \
+          aerokube/selenoid
+
+      # В этом степе нет смысла, так как через GitHub Actions нет доступа к Selenoid UI. Но зато это полезно при локальном запуске через act, для отладки
+      - name: Run Selenoid UI
+        run: |
+          docker run -d --name selenoid-ui \
+          -p 8080:8080 \
+          aerokube/selenoid-ui \
+          --selenoid-uri http://$HOST:4444
+
+      - name: Run TeamCity server
+        # Флаг -u 0 запускает контейнер от имени root, чтобы был доступ на запись файлов в директории, указанные в volume.
+        # По-хорошему, надо делать chown -R 1000:1000 на эти директории и запускать контейнер без этого флага,
+        # но это усложнение пайплайна и не приоритет в контексте данного задания.
+        # Указываем конкретную версию для сервера и агента, так как мало ли, в новой версии могут поменяться используемые локаторы,
+        # чтобы в рамках этого задания не тратить время на фикс подобных проблем.
+        run: |
+          docker run -u 0 -d --name teamcity-server \
+          -v $(pwd)/tmp/teamcity_server/datadir:/data/teamcity_server/datadir \
+          -v $(pwd)/tmp/teamcity_server/logs:/opt/teamcity/logs \
+          -p 8111:8111 \
+          jetbrains/teamcity-server:2023.11.1
+
+      - name: Set up TeamCity server
+        # Настройка сервера при первом запуске (принятие лицензии, выбор базы данных и т.д.), реализованная в виде теста
+        run: ./mvnw clean test -Dtest=SetupTest#startUpTest
+
+      - name: Set up superUserToken environment variable
+        # Берем из лога контейнера строку с последним упоминанием токена, из нее 6-е слово, что соответствует токену
+        run: echo "SUPER_USER_TOKEN=$(docker logs teamcity-server | grep 'Super user authentication token' | tail -n 1 | awk '{print $6}')" >> $GITHUB_ENV
+      - name: Set up superUserToken config property
+        run: echo "superUserToken=$SUPER_USER_TOKEN" >> src/main/resources/config.properties
+
+      - name: Run TeamCity agent
+        run: |
+          docker run -e SERVER_URL=http://$HOST:8111 -u 0 -d --name teamcity-agent \
+          -v $(pwd)/tmp/teamcity_agent/conf:/data/teamcity_agent/conf \
+          jetbrains/teamcity-agent:2023.11.1
+
+      - name: Set up TeamCity agent
+        # Авторизация агента при первом запуске, реализованная в виде теста
+        # Не указываем clean, чтобы потом в итоговом репорте были и setup тесты
+        run: ./mvnw test -Dtest=SetupTest#setUpAgentTest
+
+      - name: Run tests
+        # Указываем группу, чтобы еще раз не запустить тесты, которые использовались для сетапа сервера и агента
+        run: ./mvnw test -DsuiteXmlFile=testng-suites/regression-suite.xml
