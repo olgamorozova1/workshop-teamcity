@@ -8,8 +8,6 @@ build
 /*/allure-results/*
 out
 .mvn/*
-mvnv
-mvnw.cmd
 
 ### IntelliJ IDEA ###
 .idea/*
