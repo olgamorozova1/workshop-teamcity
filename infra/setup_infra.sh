@@ -78,7 +78,7 @@ echo "Super user token: $superuser_token"
 ################################
 echo "Run system tests"
 
-echo "host=$ip:8111\nsuperUserToken=$superuser_token\nbrowser=firefox\nremote=http://$ip:4444/wd/hub" > $teamcity_tests_directory/src/main/resources/config.properties
+echo "host=$ip:8111\nsuperUserToken=$superuser_token\nbrowser=firefox\nremote=$ip:4444/wd/hub" > $teamcity_tests_directory/src/main/resources/config.properties
 cat $teamcity_tests_directory/src/main/resources/config.properties
 echo "Run API tests"
 mvn test -DsuiteXmlFile=testng-suites/api-suite.xml
