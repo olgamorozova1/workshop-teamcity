@@ -25,6 +25,9 @@ jobs:
       - name: Set up host config property
         run: echo "host=$HOST:8111" >> src/main/resources/config.properties
 
+      - name: Set up remote config property
+        run: echo "remote=$HOST:4444/wd/hub" >> src/main/resources/config.properties
+
       - name: Pull Selenoid Firefox
         run: docker pull selenoid/vnc:firefox_89.0
 

@@ -12,7 +12,7 @@ public class BaseUiTest extends BaseTest {
     @BeforeSuite
     public void setUpUiTests() {
         Configuration.baseUrl = "http://" + Config.getProperty("host");
-        Configuration.remote = Config.getProperty("remote");
+        Configuration.remote = "http://" + Config.getProperty("remote");
         Configuration.reportsFolder = "target/surefire-reports";
         Configuration.downloadsFolder = "target/downloads";
 
