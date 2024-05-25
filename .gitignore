@@ -7,7 +7,6 @@ schema
 build
 /*/allure-results/*
 out
-.mvn/*
 
 ### IntelliJ IDEA ###
 .idea/*
