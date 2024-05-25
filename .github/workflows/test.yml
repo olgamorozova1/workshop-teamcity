@@ -25,8 +25,8 @@ jobs:
       - name: Set up host config property
         run: echo "host=$HOST:8111" >> src/main/resources/config.properties
 
-      - name: Pull Selenoid Chrome
-        run: docker pull selenoid/vnc_chrome:119.0
+      - name: Pull Selenoid Firefox
+        run: docker pull selenoid/vnc:firefox_89.0
 
       - name: Run Selenoid
         # Флаг -d запускает контейнер в фоновом режиме (так как, например, контейнер с сервером не имеет окончания, он просто всегда включен,
@@ -34,7 +34,7 @@ jobs:
         run: |
           docker run -d --name selenoid \
           -v /var/run/docker.sock:/var/run/docker.sock \
-          -v $(pwd)/config/:/etc/selenoid/:ro \
+          -v $(pwd)/infra/:/etc/selenoid/:ro \
           -p 4444:4444 \
           aerokube/selenoid
 
