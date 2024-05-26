@@ -17,6 +17,7 @@ import static com.example.teamcity.api.waiters.Waiter.waitForCondition;
 import static java.lang.String.format;
 
 public class SetupTest extends BaseUiTest {
+
     @Test
     public void startUpTest() {
         new StartUpPage()

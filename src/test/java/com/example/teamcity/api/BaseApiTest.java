@@ -1,5 +1,6 @@
 package com.example.teamcity.api;
 
+import com.example.teamcity.BaseTest;
 import com.example.teamcity.api.models.AuthSettings;
 import com.example.teamcity.api.requests.CheckedBase;
 import lombok.Getter;

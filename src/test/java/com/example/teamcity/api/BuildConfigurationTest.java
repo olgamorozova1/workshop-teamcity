@@ -7,7 +7,6 @@ import com.example.teamcity.api.models.Project;
 import com.example.teamcity.api.requests.CheckedBase;
 import com.example.teamcity.api.requests.UncheckedBase;
 import com.example.teamcity.api.spec.Specifications;
-import io.qameta.allure.Description;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -28,8 +27,7 @@ import static org.apache.http.HttpStatus.SC_NOT_FOUND;
 
 public class BuildConfigurationTest extends BaseApiTest {
 
-    @Test
-    @Description("Project can be created by user")
+    @Test(description = "Create build configuration by user")
     public void buildConfigurationTest() {
         var testData = testDataStorage.addTestData();
 
@@ -56,8 +54,7 @@ public class BuildConfigurationTest extends BaseApiTest {
         };
     }
 
-    @Test(dataProvider = "testDataBuildConfig")
-    @Description("Positive scenarios of build configuration parameters to be created with (name, id, steps)")
+    @Test(dataProvider = "testDataBuildConfig", description = "Create Build Configuration with different parameters: positive tests")
     public void createBuildConfiguration(String description, NewProjectDescription project, BuildType buildType) {
         var testData = testDataStorage.addTestData().withProject(project).withBuildType(buildType);
         projectRequestBySuperUser.create(testData.getProject());
@@ -88,8 +85,7 @@ public class BuildConfigurationTest extends BaseApiTest {
         };
     }
 
-    @Test(dataProvider = "testDataInvalidBuildConfig")
-    @Description("Negative scenarios of build configuration parameters which are not allowed")
+    @Test(dataProvider = "testDataInvalidBuildConfig", description = "Create Build Configuration with different parameters: negative tests")
     public void createBuildConfigurationInvalidData(String description, NewProjectDescription project, BuildType buildType, int httpStatusCode, String errorMessage) {
         var testData = testDataStorage.addTestData().withProject(project).withBuildType(buildType);
         projectRequestBySuperUser.create(testData.getProject());
@@ -103,8 +99,7 @@ public class BuildConfigurationTest extends BaseApiTest {
         softAssert.assertAll();
     }
 
-    @Test
-    @Description("Duplicated id of build configuration is not allowed test")
+    @Test(description = "Duplicated id of build configuration is not allowed test")
     public void createBuildConfigWithSameId() {
         var project = generateRandomClassData(NewProjectDescription.class);
         var testData = testDataStorage.addTestData().withProject(project).withBuildType(generateBuildType(project));
@@ -124,8 +119,7 @@ public class BuildConfigurationTest extends BaseApiTest {
         softAssert.assertAll();
     }
 
-    @Test
-    @Description("Duplicated name of build configuration is not allowed test")
+    @Test(description = "Duplicated name of build configuration is not allowed test")
     public void createBuildConfigWithSameName() {
         var project = generateRandomClassData(NewProjectDescription.class);
         var testData = testDataStorage.addTestData().withProject(project).withBuildType(generateBuildType(project));

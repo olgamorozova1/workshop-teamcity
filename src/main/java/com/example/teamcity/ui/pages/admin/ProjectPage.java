@@ -22,7 +22,7 @@ public class ProjectPage extends Page {
         return projectIdInput.getValue();
     }
 
-    @Step("Create build configuration")
+    @Step("Create build configuration on Project page")
     public CreateBuildConfigurationPage createBuildConfiguration() {
         createBuildConfigurationText.click();
         return new CreateBuildConfigurationPage();

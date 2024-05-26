@@ -3,6 +3,7 @@ package com.example.teamcity.ui.elements;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
 import com.example.teamcity.ui.Selectors;
+import io.qameta.allure.Step;
 import lombok.Getter;
 
 import java.util.List;
@@ -24,10 +25,12 @@ public class ProjectElement extends PageElement {
         builds = elements(Selectors.byClass("BuildTypes__item--UX"));
     }
 
+    @Step("Click expand icon")
     public void expand() {
         expandIcon.click();
     }
 
+    @Step("Get builds from page")
     public List<SubprojectElement> getBuilds() {
         return generatePageElements(builds, SubprojectElement::new);
     }
