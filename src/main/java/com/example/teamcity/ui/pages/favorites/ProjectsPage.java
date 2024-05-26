@@ -20,7 +20,7 @@ public class ProjectsPage extends FavoritesPage {
     private ElementsCollection subprojects = elements(Selectors.byClass(SUBPROJECT_CLASS_NAME));
     private SelenideElement subproject = element(Selectors.byClass(SUBPROJECT_CLASS_NAME));
 
-    @Step("Open Project page")
+    @Step("Open 'Project' page")
     public ProjectsPage open() {
         Selenide.open(FAVORITE_PROJECTS_URL);
         waitUntilFavoritesPageIsLoaded();
@@ -33,7 +33,7 @@ public class ProjectsPage extends FavoritesPage {
         return generatePageElements(subprojects, ProjectElement::new);
     }
 
-    @Step("Wait for element")
+    @Step("Wait for elements to be shown")
     private void waitForSubprojectElement() {
         subproject.shouldBe(Condition.visible, Duration.ofSeconds(10));
     }

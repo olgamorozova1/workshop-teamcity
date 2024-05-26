@@ -3,6 +3,8 @@
     <test name="API Test">
         <classes>
             <class name="com.example.teamcity.api.BuildConfigurationTest"/>
+            <class name="com.example.teamcity.api.ProjectTest"/>
+            <class name="com.example.teamcity.api.RolesTest"/>
         </classes>
     </test>
 </suite>

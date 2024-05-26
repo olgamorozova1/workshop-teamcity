@@ -28,7 +28,7 @@ public class CreteNewProjectPage extends Page {
     private SelenideElement errorMessageCreateProjectNameSpan = element(Selectors.byId("errorName"));
     private SelenideElement errorMessageCreateProjectIdSpan = element(Selectors.byId("errorExternalId"));
 
-    @Step("Open Create new project page")
+    @Step("Open 'Create new project' page")
     public CreteNewProjectPage open(String parentProjectId) {
         Selenide.open("/admin/createObjectMenu.html?projectId=" + parentProjectId + "&showMode=createProjectMenu");
         waitUntilPageIsLoaded();
@@ -63,27 +63,27 @@ public class CreteNewProjectPage extends Page {
         return new ProjectPage();
     }
 
-    @Step("Get Error Message Url")
+    @Step("Get error message url")
     public String getErrorMessageUrl() {
         return errorMessageUrlSpan.getText();
     }
 
-    @Step("Get Error Project Name")
+    @Step("Get error project name")
     public String getErrorMessageProjectName() {
         return errorMessageProjectNameSpan.getText();
     }
 
-    @Step("Get Error Build Name")
+    @Step("Get error build name")
     public String getErrorMessageBuildName() {
         return errorMessageBuildNameSpan.getText();
     }
 
-    @Step("Get Error Create Project Name")
+    @Step("Get error create project name")
     public String getErrorMessageCreateProjectName() {
         return errorMessageCreateProjectNameSpan.getText();
     }
 
-    @Step("Get Error Invalid Project Id")
+    @Step("Get error invalid project id")
     public String getErrorMessageInvalidProjectId() {
         return errorMessageCreateProjectIdSpan.getText();
     }

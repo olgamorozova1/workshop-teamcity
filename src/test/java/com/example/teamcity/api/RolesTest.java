@@ -26,7 +26,7 @@ import static org.apache.http.HttpStatus.SC_UNAUTHORIZED;
 public class RolesTest extends BaseApiTest {
 
 
-    @Test(description = "Unauthorized User Should Not Have Rights To Create Project")
+    @Test(description = "Unauthorized user should not have rights to create project")
     public void unauthorizedUserShouldNotHaveRightsToCreateProject() {
         var testData = testDataStorage.addTestData();
 
@@ -40,7 +40,7 @@ public class RolesTest extends BaseApiTest {
     }
 
 
-    @Test(description = "System Admin Should Have Rights To Create Project")
+    @Test(description = "System admin should have rights to create project")
     public void systemAdminShouldHaveRightsToCreateProject() {
         var testData = testDataStorage.addTestData();
 
@@ -54,7 +54,7 @@ public class RolesTest extends BaseApiTest {
         softAssert.assertThat(project.getId()).isEqualTo(testData.getProject().getId());
     }
 
-    @Test(description = "Project Admin Should Have Rights To Create Build Config To His Project")
+    @Test(description = "Project admin should have rights to create build config to his project")
     public void projectAdminShouldHaveRightsToCreateBuildConfigToHisProject() {
         var testData = testDataStorage.addTestData();
 
@@ -70,7 +70,7 @@ public class RolesTest extends BaseApiTest {
         softAssert.assertThat(buildConfig.getId()).isEqualTo(testData.getBuildType().getId());
     }
 
-    @Test(description = "Project Admin Should Not Have Rights To Create Build Config To Another Project")
+    @Test(description = "Project admin should not have rights to create build config to another project")
     public void projectAdminShouldNotHaveRightsToCreateBuildConfigToAnotherProject() {
         var firstTestData = testDataStorage.addTestData();
         var secondTestData = testDataStorage.addTestData();

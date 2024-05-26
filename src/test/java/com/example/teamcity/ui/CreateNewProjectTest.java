@@ -21,7 +21,7 @@ public class CreateNewProjectTest extends BaseUiTest {
 
     //------------------ Positive tests --------------------//
 
-    @Test(description = "Authorized User Should Be Able Create New Project")
+    @Test(description = "Authorized user should be able create new project")
     public void authorizedUserShouldBeAbleCreateNewProject() {
         var testData = testDataStorage.addTestData();
 
@@ -38,7 +38,7 @@ public class CreateNewProjectTest extends BaseUiTest {
                 .getHeader().shouldHave(Condition.text(testData.getProject().getName()));
     }
 
-    @Test(description = "Create New Project With Build Configuration Manually")
+    @Test(description = "Create new project with build configuration manually")
     public void createNewProjectWithBuildConfigurationManually() {
         var testData = testDataStorage.addTestData();
 
@@ -68,7 +68,7 @@ public class CreateNewProjectTest extends BaseUiTest {
 
     //------------------ Negative tests --------------------//
 
-    @Test(description = "Check Create New Project From VCS Invalid Data")
+    @Test(description = "Check create new project from VCS invalid data")
     public void checkCreateNewProjectFromVCSInvalidData() {
         var testData = testDataStorage.addTestData();
 
@@ -94,7 +94,7 @@ public class CreateNewProjectTest extends BaseUiTest {
         softAssert.assertAll();
     }
 
-    @Test(description = "Create New Project With Build Configuration Manually Invalid Data")
+    @Test(description = "Create new project with build configuration manually invalid data")
     public void createNewProjectWithBuildConfigurationManuallyInvalidData() {
         var testData = testDataStorage.addTestData();
         var createNewProjectPage = new CreteNewProjectPage();

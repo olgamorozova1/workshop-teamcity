@@ -12,13 +12,13 @@ public class VcsRootPage extends Page {
     private SelenideElement repositoryUrl = element(Selectors.byId("repositoryUrl"));
     private SelenideElement repositoryUrlErrorSpan = element(Selectors.byId("error_repositoryUrl"));
 
-    @Step("Add Repository Url")
+    @Step("Add repository url")
     public void addRepositoryUrl(String url) {
         repositoryUrl.sendKeys(url);
         submit();
     }
 
-    @Step("Get Error Message Invalid Url")
+    @Step("Get error message invalid url")
     public String getErrorMessageInvalidUrl() {
         return repositoryUrlErrorSpan.getText();
     }

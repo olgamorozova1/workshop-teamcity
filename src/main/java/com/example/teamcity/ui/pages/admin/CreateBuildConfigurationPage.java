@@ -25,12 +25,12 @@ public class CreateBuildConfigurationPage extends Page {
         return new VcsRootPage();
     }
 
-    @Step("Get Error Message Invalid Build Name")
+    @Step("Get error message invalid build name")
     public String getErrorMessageInvalidBuildName() {
         return errorMessageNameInvalidSpan.getText();
     }
 
-    @Step("Get Error Message Invalid Build Id")
+    @Step("Get error message invalid build id")
     public String getErrorMessageInvalidBuildId() {
         return errorMessageIdInvalidSpan.getText();
     }

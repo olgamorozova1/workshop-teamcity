@@ -13,11 +13,12 @@ public class ProjectPage extends Page {
     private SelenideElement projectIdInput = element(Selectors.byId("externalId"));
     private SelenideElement createBuildConfigurationText = element(new ByText("Create build configuration"));
 
-
+    @Step("Create project name text")
     public String getProjectNameText() {
         return projectNameInput.getValue();
     }
 
+    @Step("Create project id text")
     public String getProjectIdText() {
         return projectIdInput.getValue();
     }

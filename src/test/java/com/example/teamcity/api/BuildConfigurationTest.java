@@ -54,7 +54,7 @@ public class BuildConfigurationTest extends BaseApiTest {
         };
     }
 
-    @Test(dataProvider = "testDataBuildConfig", description = "Create Build Configuration with different parameters: positive tests")
+    @Test(dataProvider = "testDataBuildConfig", description = "Create build configuration with different parameters: positive tests")
     public void createBuildConfiguration(String description, NewProjectDescription project, BuildType buildType) {
         var testData = testDataStorage.addTestData().withProject(project).withBuildType(buildType);
         projectRequestBySuperUser.create(testData.getProject());
@@ -85,7 +85,7 @@ public class BuildConfigurationTest extends BaseApiTest {
         };
     }
 
-    @Test(dataProvider = "testDataInvalidBuildConfig", description = "Create Build Configuration with different parameters: negative tests")
+    @Test(dataProvider = "testDataInvalidBuildConfig", description = "Create build configuration with different parameters: negative tests")
     public void createBuildConfigurationInvalidData(String description, NewProjectDescription project, BuildType buildType, int httpStatusCode, String errorMessage) {
         var testData = testDataStorage.addTestData().withProject(project).withBuildType(buildType);
         projectRequestBySuperUser.create(testData.getProject());
