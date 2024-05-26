@@ -1,6 +1,7 @@
 package com.example.teamcity.api.generators;
 
 import com.example.teamcity.api.models.Deletable;
+import io.qameta.allure.Step;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,12 +25,14 @@ public class TestDataStorage {
         return testDataStorage;
     }
 
+    @Step("Add test data")
     public TestData addTestData() {
         var testData = TestDataGenerator.generate();
         getStorage().testDataList.add(testData);
         return testData;
     }
 
+    @Step("Add test data")
     public TestData addTestData(TestData testData) {
         getStorage().testDataList.add(testData);
         return testData;

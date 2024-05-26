@@ -4,6 +4,7 @@ import com.codeborne.selenide.SelenideElement;
 import com.codeborne.selenide.selector.ByText;
 import com.example.teamcity.ui.Selectors;
 import com.example.teamcity.ui.pages.Page;
+import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Selenide.element;
 
@@ -21,6 +22,7 @@ public class ProjectPage extends Page {
         return projectIdInput.getValue();
     }
 
+    @Step("Create build configuration")
     public CreateBuildConfigurationPage createBuildConfiguration() {
         createBuildConfigurationText.click();
         return new CreateBuildConfigurationPage();

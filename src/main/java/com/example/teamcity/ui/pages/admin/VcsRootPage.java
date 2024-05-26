@@ -3,6 +3,7 @@ package com.example.teamcity.ui.pages.admin;
 import com.codeborne.selenide.SelenideElement;
 import com.example.teamcity.ui.Selectors;
 import com.example.teamcity.ui.pages.Page;
+import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Selenide.element;
 
@@ -11,11 +12,13 @@ public class VcsRootPage extends Page {
     private SelenideElement repositoryUrl = element(Selectors.byId("repositoryUrl"));
     private SelenideElement repositoryUrlErrorSpan = element(Selectors.byId("error_repositoryUrl"));
 
+    @Step("Add Repository Url")
     public void addRepositoryUrl(String url) {
         repositoryUrl.sendKeys(url);
         submit();
     }
 
+    @Step("Get Error Message Invalid Url")
     public String getErrorMessageInvalidUrl() {
         return repositoryUrlErrorSpan.getText();
     }

@@ -6,6 +6,7 @@ import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import com.example.teamcity.ui.Selectors;
 import com.example.teamcity.ui.elements.ProjectElement;
+import io.qameta.allure.Step;
 
 import java.time.Duration;
 import java.util.List;
@@ -19,17 +20,20 @@ public class ProjectsPage extends FavoritesPage {
     private ElementsCollection subprojects = elements(Selectors.byClass(SUBPROJECT_CLASS_NAME));
     private SelenideElement subproject = element(Selectors.byClass(SUBPROJECT_CLASS_NAME));
 
+    @Step("Open Project page")
     public ProjectsPage open() {
         Selenide.open(FAVORITE_PROJECTS_URL);
         waitUntilFavoritesPageIsLoaded();
         return this;
     }
 
+    @Step("Get sub projects")
     public List<ProjectElement> getSubProjects() {
         waitForSubprojectElement();
         return generatePageElements(subprojects, ProjectElement::new);
     }
 
+    @Step("Wait for element")
     private void waitForSubprojectElement() {
         subproject.shouldBe(Condition.visible, Duration.ofSeconds(10));
     }

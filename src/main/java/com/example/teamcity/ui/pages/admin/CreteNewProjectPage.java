@@ -5,6 +5,7 @@ import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import com.example.teamcity.ui.Selectors;
 import com.example.teamcity.ui.pages.Page;
+import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Selenide.element;
 
@@ -27,12 +28,14 @@ public class CreteNewProjectPage extends Page {
     private SelenideElement errorMessageCreateProjectNameSpan = element(Selectors.byId("errorName"));
     private SelenideElement errorMessageCreateProjectIdSpan = element(Selectors.byId("errorExternalId"));
 
+    @Step("Open Create new project page")
     public CreteNewProjectPage open(String parentProjectId) {
         Selenide.open("/admin/createObjectMenu.html?projectId=" + parentProjectId + "&showMode=createProjectMenu");
         waitUntilPageIsLoaded();
         return this;
     }
 
+    @Step("Select create project by url")
     public CreteNewProjectPage createProjectByUrl(String url) {
         urlInput.clear();
         urlInput.sendKeys(url);
@@ -40,6 +43,7 @@ public class CreteNewProjectPage extends Page {
         return this;
     }
 
+    @Step("Setup project")
     public void setupProject(String projectName, String buildTypeName) {
         projectNameInput.clear();
         projectNameInput.sendKeys(projectName);
@@ -48,6 +52,7 @@ public class CreteNewProjectPage extends Page {
         submit();
     }
 
+    @Step("Select create project manually")
     public ProjectPage createProjectManually(String name, String id) {
         createManuallyLink.click();
         createProjectNameInput.clear();
@@ -58,22 +63,27 @@ public class CreteNewProjectPage extends Page {
         return new ProjectPage();
     }
 
+    @Step("Get Error Message Url")
     public String getErrorMessageUrl() {
         return errorMessageUrlSpan.getText();
     }
 
+    @Step("Get Error Project Name")
     public String getErrorMessageProjectName() {
         return errorMessageProjectNameSpan.getText();
     }
 
+    @Step("Get Error Build Name")
     public String getErrorMessageBuildName() {
         return errorMessageBuildNameSpan.getText();
     }
 
+    @Step("Get Error Create Project Name")
     public String getErrorMessageCreateProjectName() {
         return errorMessageCreateProjectNameSpan.getText();
     }
 
+    @Step("Get Error Invalid Project Id")
     public String getErrorMessageInvalidProjectId() {
         return errorMessageCreateProjectIdSpan.getText();
     }

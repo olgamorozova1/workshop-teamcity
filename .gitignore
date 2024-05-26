@@ -6,6 +6,7 @@ target/
 schema
 build
 /*/allure-results/*
+/*/allure-report/*
 out
 
 ### IntelliJ IDEA ###
