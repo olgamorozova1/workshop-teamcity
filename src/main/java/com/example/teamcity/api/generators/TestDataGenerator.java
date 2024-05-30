@@ -5,6 +5,7 @@ import com.example.teamcity.api.models.NewProjectDescription;
 import com.example.teamcity.api.models.Role;
 import com.example.teamcity.api.models.Roles;
 import com.example.teamcity.api.models.User;
+import io.qameta.allure.Step;
 
 import java.util.List;
 
@@ -27,6 +28,7 @@ public class TestDataGenerator {
         return Roles.builder().role(List.of(Role.builder().roleId(role.getText()).scope(scope).build())).build();
     }
 
+    @Step("Add test data build configuration")
     public static BuildType generateBuildType(NewProjectDescription project) {
         return generateRandomClassData(BuildType.class).withProject(project);
     }

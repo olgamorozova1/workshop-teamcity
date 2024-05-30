@@ -18,6 +18,7 @@ import static org.apache.http.HttpStatus.SC_BAD_REQUEST;
 import static org.apache.http.HttpStatus.SC_INTERNAL_SERVER_ERROR;
 
 public class ProjectTest extends BaseApiTest {
+
     @DataProvider
     public Object[][] testDataRootProject() {
         return new Object[][]{
@@ -30,7 +31,7 @@ public class ProjectTest extends BaseApiTest {
         };
     }
 
-    @Test(dataProvider = "testDataRootProject")
+    @Test(dataProvider = "testDataRootProject", description = "Create project with different parameters: positive test")
     public void createProject(String description, NewProjectDescription project) {
         var testData = testDataStorage.addTestData().withProject(project);
         projectRequestBySuperUser.create(testData.getProject());
@@ -57,7 +58,7 @@ public class ProjectTest extends BaseApiTest {
         };
     }
 
-    @Test(dataProvider = "invalidTestData")
+    @Test(dataProvider = "invalidTestData", description = "Create project with invalid parameters: negative test")
     public void createProjectInvalidData(String description, NewProjectDescription project, int httpStatusCode, String errorMessage) {
         var testData = testDataStorage.addTestData().withProject(project);
         var response = new UncheckedBase(getSpec().superUserSpec(), PROJECT_ENDPOINT).create(testData.getProject());
@@ -66,7 +67,7 @@ public class ProjectTest extends BaseApiTest {
         softAssert.assertAll();
     }
 
-    @Test
+    @Test(description = "Duplicated project id is not allowed test")
     public void createProjectWithSameId() {
         var firstProjectTestData = testDataStorage.addTestData();
         var firstProjectId = firstProjectTestData.getProject().getId();
@@ -78,7 +79,7 @@ public class ProjectTest extends BaseApiTest {
         softAssert.assertAll();
     }
 
-    @Test
+    @Test(description = "Duplicated project name is not allowed test")
     public void createProjectWithSameName() {
         var firstProjectTestData = testDataStorage.addTestData();
         var firstProjectName = firstProjectTestData.getProject().getName();

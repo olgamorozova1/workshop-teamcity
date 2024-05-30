@@ -27,7 +27,7 @@ import static org.apache.http.HttpStatus.SC_NOT_FOUND;
 
 public class BuildConfigurationTest extends BaseApiTest {
 
-    @Test
+    @Test(description = "Create build configuration by user")
     public void buildConfigurationTest() {
         var testData = testDataStorage.addTestData();
 
@@ -54,7 +54,7 @@ public class BuildConfigurationTest extends BaseApiTest {
         };
     }
 
-    @Test(dataProvider = "testDataBuildConfig")
+    @Test(dataProvider = "testDataBuildConfig", description = "Create build configuration with different parameters: positive tests")
     public void createBuildConfiguration(String description, NewProjectDescription project, BuildType buildType) {
         var testData = testDataStorage.addTestData().withProject(project).withBuildType(buildType);
         projectRequestBySuperUser.create(testData.getProject());
@@ -85,7 +85,7 @@ public class BuildConfigurationTest extends BaseApiTest {
         };
     }
 
-    @Test(dataProvider = "testDataInvalidBuildConfig")
+    @Test(dataProvider = "testDataInvalidBuildConfig", description = "Create build configuration with different parameters: negative tests")
     public void createBuildConfigurationInvalidData(String description, NewProjectDescription project, BuildType buildType, int httpStatusCode, String errorMessage) {
         var testData = testDataStorage.addTestData().withProject(project).withBuildType(buildType);
         projectRequestBySuperUser.create(testData.getProject());
@@ -99,7 +99,7 @@ public class BuildConfigurationTest extends BaseApiTest {
         softAssert.assertAll();
     }
 
-    @Test
+    @Test(description = "Duplicated id of build configuration is not allowed test")
     public void createBuildConfigWithSameId() {
         var project = generateRandomClassData(NewProjectDescription.class);
         var testData = testDataStorage.addTestData().withProject(project).withBuildType(generateBuildType(project));
@@ -119,7 +119,7 @@ public class BuildConfigurationTest extends BaseApiTest {
         softAssert.assertAll();
     }
 
-    @Test
+    @Test(description = "Duplicated name of build configuration is not allowed test")
     public void createBuildConfigWithSameName() {
         var project = generateRandomClassData(NewProjectDescription.class);
         var testData = testDataStorage.addTestData().withProject(project).withBuildType(generateBuildType(project));

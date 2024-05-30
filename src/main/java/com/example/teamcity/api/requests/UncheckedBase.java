@@ -32,6 +32,10 @@ public class UncheckedBase extends Request implements Crud {
         return given().spec(spec).get(endpoint + id);
     }
 
+    public Response get() {
+        return given().spec(spec).get(endpoint);
+    }
+
     @Override
     public Response update(Object value, Object obj) {
         return null;

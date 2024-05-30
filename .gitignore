@@ -6,10 +6,8 @@ target/
 schema
 build
 /*/allure-results/*
+/*/allure-report/*
 out
-.mvn/*
-mvnv
-mvnw.cmd
 
 ### IntelliJ IDEA ###
 .idea/*

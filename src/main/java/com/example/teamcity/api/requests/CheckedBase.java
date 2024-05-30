@@ -1,5 +1,6 @@
 package com.example.teamcity.api.requests;
 
+import io.qameta.allure.Step;
 import io.restassured.specification.RequestSpecification;
 
 import static com.example.teamcity.api.generators.TestDataStorage.getStorage;
@@ -14,7 +15,7 @@ public class CheckedBase<T> extends Request implements Crud {
         this.returnType = returnType;
     }
 
-
+    @Step("Send api request to create object")
     @Override
     public T create(Object obj) {
         var entity = new UncheckedBase(spec, endpoint).create(obj)
@@ -24,12 +25,14 @@ public class CheckedBase<T> extends Request implements Crud {
         return entity;
     }
 
+    @Step("Send api request to update object")
     public T put(Object obj) {
         return new UncheckedBase(spec, endpoint).put(obj)
                 .then().assertThat().statusCode(SC_OK)
                 .extract().as(returnType);
     }
 
+    @Step("Send api request to get data")
     @Override
     public T get(String id) {
         return new UncheckedBase(spec, endpoint)
@@ -38,11 +41,21 @@ public class CheckedBase<T> extends Request implements Crud {
                 .extract().as(returnType);
     }
 
+    @Step("Send api request to get data")
+    public T get() {
+        return new UncheckedBase(spec, endpoint)
+                .get()
+                .then().assertThat().statusCode(SC_OK)
+                .extract().as(returnType);
+    }
+
+    @Step("Send api request to update data")
     @Override
     public T update(Object value, Object obj) {
         return null;
     }
 
+    @Step("Send api request to delete data")
     @Override
     public String delete(String id) {
         return new UncheckedBase(spec, endpoint)

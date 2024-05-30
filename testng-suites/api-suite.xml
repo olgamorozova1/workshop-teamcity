@@ -1,0 +1,10 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="API Suite">
+    <test name="API Test">
+        <classes>
+            <class name="com.example.teamcity.api.BuildConfigurationTest"/>
+            <class name="com.example.teamcity.api.ProjectTest"/>
+            <class name="com.example.teamcity.api.RolesTest"/>
+        </classes>
+    </test>
+</suite>
