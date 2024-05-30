@@ -22,6 +22,7 @@
         <assertJ.version>3.25.3</assertJ.version>
         <java.faker.version>1.0.2</java.faker.version>
         <selenide.version>7.2.3</selenide.version>
+        <swagger.coverage.version>1.5.0</swagger.coverage.version>
     </properties>
 
     <dependencies>
@@ -85,6 +86,11 @@
             <groupId>com.codeborne</groupId>
             <artifactId>selenide</artifactId>
             <version>${selenide.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.viclovsky</groupId>
+            <artifactId>swagger-coverage-rest-assured</artifactId>
+            <version>${swagger.coverage.version}</version>
         </dependency>
     </dependencies>
     <build>
