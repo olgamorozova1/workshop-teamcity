@@ -129,20 +129,3 @@ jobs:
           path: |
             swagger-coverage-report.html
             swagger-coverage-results.json
-
-      - name: Checkout gh-pages branch
-        uses: actions/checkout@v2
-        with:
-          ref: 'gh-pages'
-
-      - name: Copy Swagger Coverage Report to gh-pages
-        run: |
-          cp swagger-coverage-output/swagger-coverage-report.html .
-
-      - name: Commit and Push changes
-        uses: ad-m/github-push-action@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: 'gh-pages'
-          force: true
-          commit_message: 'Update Swagger Coverage Report'
