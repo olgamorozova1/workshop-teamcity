@@ -92,13 +92,8 @@ jobs:
         # Указываем группу, чтобы еще раз не запустить тесты, которые использовались для сетапа сервера и агента
         run: ./mvnw test -DsuiteXmlFile=testng-suites/regression-suite.xml
 
-      # Создание репорта с покрытием API тестов, основанного на Swagger. Документация: https://github.com/viclovsky/swagger-coverage
-      - name: Run Swagger coverage
-        if: always()
-        run: .swagger-coverage-commandline/bin/swagger-coverage-commandline -s http://$HOST:8111/app/rest/swagger.json -i swagger-coverage-output
-
       - name: Load test report history
-        uses: actions/checkout@v4
+        uses: actions/checkout@v3
         if: always()
         continue-on-error: true
         with:
@@ -122,6 +117,11 @@ jobs:
           publish_branch: gh-pages
           publish_dir: allure-history
 
+      # Создание репорта с покрытием API тестов, основанного на Swagger. Документация: https://github.com/viclovsky/swagger-coverage
+      - name: Run Swagger coverage
+        if: always()
+        run: .swagger-coverage-commandline/bin/swagger-coverage-commandline -s http://$HOST:8111/app/rest/swagger.json -i swagger-coverage-output
+
       # Swagger coverage репорт сохраняется в артефакты GitHub Actions прогона
       - name: Save Swagger coverage
         uses: actions/upload-artifact@v4
@@ -131,11 +131,3 @@ jobs:
           path: |
             swagger-coverage-report.html
             swagger-coverage-results.json
-
-      - name: Publish swagger report
-        uses: peaceiris/actions-gh-pages@v3
-        if: always()
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_branch: gh-pages
-          publish_dir: swagger-coverage-report.html
