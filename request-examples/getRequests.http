@@ -1,5 +1,0 @@
-GET http://192.168.1.103:8111/app/rest/buildTypes/id:id
-Accept: application/json
-X-TC-CSRF-Token:41d73623-ebad-4db6-9d58-59b436b1650b
-
-###
