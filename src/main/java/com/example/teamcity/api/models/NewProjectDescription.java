@@ -1,5 +1,6 @@
 package com.example.teamcity.api.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,6 +16,7 @@ import static com.example.teamcity.api.constants.Endpoints.PROJECT_ENDPOINT_BY_I
 @NoArgsConstructor
 @Builder
 @EqualsAndHashCode
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class NewProjectDescription implements Deletable {
     private Project parentProject;
     private String name;

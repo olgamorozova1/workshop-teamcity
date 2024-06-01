@@ -1,7 +1,6 @@
 package com.example.teamcity.api.spec;
 
 import com.example.teamcity.api.models.User;
-import com.github.viclovsky.swagger.coverage.SwaggerCoverageRestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.filter.log.RequestLoggingFilter;
 import io.restassured.filter.log.ResponseLoggingFilter;
@@ -29,7 +28,7 @@ public class Specifications {
         return new RequestSpecBuilder()
                 .addFilter(new RequestLoggingFilter())
                 .addFilter(new ResponseLoggingFilter())
-                .addFilter(new SwaggerCoverageRestAssured())
+//                .addFilter(new SwaggerCoverageRestAssured())
                 .setBaseUri("http://" + getProperty("host"))
                 .setContentType(ContentType.JSON)
                 .setAccept(ContentType.JSON);
