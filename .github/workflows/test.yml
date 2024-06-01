@@ -12,6 +12,8 @@ jobs:
         with:
           java-version: '17'
           distribution: 'zulu'
+      - name: Run Checkstyle
+        run: mvn validate -Dcheckstyle.failOnViolation=true
 
         # По умолчанию в ubuntu отсутствует команда ifconfig
       - name: Install ifconfig
