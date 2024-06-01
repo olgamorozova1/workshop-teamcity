@@ -8,7 +8,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class BrowserSettings {
-    
     public static void setup(String browser) {
         Configuration.browser = browser;
         switch (browser) {
@@ -18,6 +17,8 @@ public class BrowserSettings {
             case "chrome":
                 setChromeOptions();
                 break;
+            default:
+                setFirefoxOptions();
         }
     }
 

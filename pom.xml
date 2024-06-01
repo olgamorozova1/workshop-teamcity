@@ -23,6 +23,7 @@
         <java.faker.version>1.0.2</java.faker.version>
         <selenide.version>7.2.3</selenide.version>
         <swagger.coverage.version>1.5.0</swagger.coverage.version>
+        <checkstyle.version>3.3.1</checkstyle.version>
     </properties>
 
     <dependencies>
@@ -128,6 +129,24 @@
                 <groupId>io.qameta.allure</groupId>
                 <artifactId>allure-maven</artifactId>
                 <version>2.12.0</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>${checkstyle.version}</version>
+                <configuration>
+                    <configLocation>src/main/resources/checkstyle.xml</configLocation>
+                    <consoleOutput>true</consoleOutput>
+                    <failsOnError>true</failsOnError>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
