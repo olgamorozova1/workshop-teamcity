@@ -128,18 +128,17 @@ jobs:
           allure_report: allure-report
           allure_results: target/allure-results
 
-      - name: Publish test report
-        uses: peaceiris/actions-gh-pages@v4
-        if: always()
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_branch: gh-pages
-          publish_dir: allure-history
+      - name: Prepare Deployment Directory
+        run: |
+          mkdir -p deployment_dir/allure-history
+          mkdir -p deployment_dir/swagger-coverage
+          cp -r target/allure-results/* deployment_dir/allure-history
+          cp -r swagger-coverage/* deployment_dir/swagger-coverage
 
-      - name: Publish swagger report
+      - name: Publish reports
         uses: peaceiris/actions-gh-pages@v4
         if: always()
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
-          publish_dir: swagger-coverage
+          publish_dir: deployment_dir
