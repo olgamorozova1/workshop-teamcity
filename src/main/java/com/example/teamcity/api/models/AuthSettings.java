@@ -1,5 +1,6 @@
 package com.example.teamcity.api.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,6 +16,7 @@ import java.util.List;
 @NoArgsConstructor
 @EqualsAndHashCode
 @Builder
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class AuthSettings {
     private boolean allowGuest;
     private String guestUsername;
@@ -26,7 +28,9 @@ public class AuthSettings {
 
     @Data
     @AllArgsConstructor
+    @NoArgsConstructor
     @Builder
+    @JsonIgnoreProperties(ignoreUnknown = true)
     public static class Modules {
         private List<Module> module;
     }
@@ -35,6 +39,7 @@ public class AuthSettings {
     @AllArgsConstructor
     @NoArgsConstructor
     @Builder
+    @JsonIgnoreProperties(ignoreUnknown = true)
     public static class Module {
         private String name;
         private Properties properties;
@@ -44,6 +49,7 @@ public class AuthSettings {
     @AllArgsConstructor
     @NoArgsConstructor
     @Builder
+    @JsonIgnoreProperties(ignoreUnknown = true)
     public static class Properties {
         private List<Property> property;
         private int count;
@@ -54,6 +60,7 @@ public class AuthSettings {
     @AllArgsConstructor
     @NoArgsConstructor
     @Builder
+    @JsonIgnoreProperties(ignoreUnknown = true)
     public static class Property {
         private String name;
         private String value;
@@ -65,6 +72,7 @@ public class AuthSettings {
     @AllArgsConstructor
     @NoArgsConstructor
     @Builder
+    @JsonIgnoreProperties(ignoreUnknown = true)
     public static class Type {
         private String rawValue;
     }

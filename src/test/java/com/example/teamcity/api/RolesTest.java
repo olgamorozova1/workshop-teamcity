@@ -25,7 +25,6 @@ import static org.apache.http.HttpStatus.SC_UNAUTHORIZED;
 
 public class RolesTest extends BaseApiTest {
 
-
     @Test(description = "Unauthorized user should not have rights to create project")
     public void unauthorizedUserShouldNotHaveRightsToCreateProject() {
         var testData = testDataStorage.addTestData();

@@ -12,6 +12,8 @@ jobs:
         with:
           java-version: '17'
           distribution: 'zulu'
+      - name: Run Checkstyle
+        run: mvn validate -Dcheckstyle.failOnViolation=true
 
         # По умолчанию в ubuntu отсутствует команда ifconfig
       - name: Install ifconfig
@@ -21,6 +23,7 @@ jobs:
         # Команда для определения ip адреса для обращения из другого контейнера, рекомендуется в документации Selenoid UI: https://aerokube.com/selenoid-ui/latest/
         run: |
           echo "HOST=$(ifconfig | grep -E "([0-9]{1,3}\.){3}[0-9]{1,3}" | grep -v 127.0.0.1 | awk '{ print $2 }' | cut -f2 -d: | head -n1)" >> $GITHUB_ENV
+
       # Храним переменные как в переменных среды ($GITHUB_ENV), для использования внутри этого yml файла, так и в config.properties, для использования в тестах
       - name: Set up host config property
         run: echo "host=$HOST:8111" >> src/main/resources/config.properties
@@ -91,7 +94,7 @@ jobs:
         run: ./mvnw test -DsuiteXmlFile=testng-suites/regression-suite.xml
 
       - name: Load test report history
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         if: always()
         continue-on-error: true
         with:
@@ -114,3 +117,18 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
           publish_dir: allure-history
+
+      # Создание репорта с покрытием API тестов, основанного на Swagger. Документация: https://github.com/viclovsky/swagger-coverage
+      - name: Run Swagger coverage
+        if: always()
+        run: .swagger-coverage-commandline/bin/swagger-coverage-commandline -s http://$HOST:8111/app/rest/swagger.json -i swagger-coverage-output
+
+      # Swagger coverage репорт сохраняется в артефакты GitHub Actions прогона
+      - name: Save Swagger coverage
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: swagger-coverage
+          path: |
+            swagger-coverage-report.html
+            swagger-coverage-results.json
