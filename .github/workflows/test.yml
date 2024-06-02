@@ -23,6 +23,7 @@ jobs:
         # Команда для определения ip адреса для обращения из другого контейнера, рекомендуется в документации Selenoid UI: https://aerokube.com/selenoid-ui/latest/
         run: |
           echo "HOST=$(ifconfig | grep -E "([0-9]{1,3}\.){3}[0-9]{1,3}" | grep -v 127.0.0.1 | awk '{ print $2 }' | cut -f2 -d: | head -n1)" >> $GITHUB_ENV
+
       # Храним переменные как в переменных среды ($GITHUB_ENV), для использования внутри этого yml файла, так и в config.properties, для использования в тестах
       - name: Set up host config property
         run: echo "host=$HOST:8111" >> src/main/resources/config.properties
@@ -93,7 +94,7 @@ jobs:
         run: ./mvnw test -DsuiteXmlFile=testng-suites/regression-suite.xml
 
       - name: Load test report history
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         if: always()
         continue-on-error: true
         with:
